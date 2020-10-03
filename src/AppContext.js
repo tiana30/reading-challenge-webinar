@@ -11,18 +11,21 @@ const appStateReducer = (state, action) => {
     console.log(action.type);
     switch (action.type) {
         case "READ_BOOK": {
-            console.log(state.completed);
+           let newToRead = state.toRead.filter((item) => {
+               return item !== action.item;
+           })
+           let newCompleted = state.completed.concat(action.item);
+
+           localStorage.setItem("to_read_list", newToRead);
+           localStorage.setItem("completed_list", newCompleted);
             return {
                 ...state,
-                toRead: state.toRead.filter((item)=> {
-                    return item !== action.item;
-                }),
-                completed: state.completed.concat(action.item),
+                toRead: newToRead,
+                completed: newCompleted
             };
         }
 
         case "UNREAD_BOOK": {
-            console.log(state.completed);
             return {
                 ...state,
                 toRead: state.toRead.concat(action.item),
@@ -44,9 +47,9 @@ const appStateReducer = (state, action) => {
             return state;
     };
 }
-
+ const initialState = {toRead: BOOKS, completed: []};
+    
 export function AppStateProvider ({children}) {
-    const initialState = {toRead: BOOKS, completed: []};
-    const value = useReducer(appStateReducer, initialState);
+   const value = useReducer(appStateReducer, initialState);
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

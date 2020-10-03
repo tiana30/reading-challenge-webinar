@@ -2,8 +2,8 @@ import React from 'react';
 import {useAppState} from '../AppContext';
 
 export default function BookList ({completeList}) {
-    let[state, dispatch] = useAppState();
-    let{toRead, completed} = state;
+    let[{toRead, completed}, dispatch] = useAppState();
+    
 
     return(
         <div>

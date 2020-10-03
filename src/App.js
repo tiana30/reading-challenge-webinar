@@ -1,14 +1,15 @@
 import React from 'react';
 import {AppStateProvider} from './AppContext';
-import BookList from './components/Booklist'
+import Header from './components/Header';
+import BookList from './components/Booklist';
 import './App.css';
 
 function App() {
   return (
     <AppStateProvider>
+    <Header />
       <div className="App">
-        <header className="App-header">Reading Challenge</header>
-        <div className="lists">
+         <div className="lists">
           <BookList />
           <BookList completeList />
         </div>
