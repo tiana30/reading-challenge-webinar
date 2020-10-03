@@ -7,7 +7,7 @@ export default function BookList ({completeList}) {
 
     return(
         <div>
-            <h1>{completeList ? 'Completed' : 'To Read'}</h1>
+            <h3>{completeList ? 'Completed Books' : 'Books To Read'}</h3>
             <ul>
                 {
                     !completeList && toRead.map((book, index) => {
